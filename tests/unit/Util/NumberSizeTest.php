@@ -46,4 +46,18 @@ class NumberSizeTest extends AbstractTestCase
 
         $this->assertEquals($expected, $size);
     }
+
+    public function getByte() {
+        return $this->_getAdapters([
+            [255, 1], [256, 2], [257, 2]
+        ]);
+    }
+
+    /**
+     * @dataProvider getByte
+     */
+    public function testGetFlooredByteSize(MathAdapterInterface $adapter, $x, $expected) {
+        $size = NumberSize::getFlooredByteSize($adapter, $x);
+        $this->assertEquals($expected, $size);
+    }
 }
